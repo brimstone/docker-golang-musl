@@ -18,3 +18,9 @@ Then build!
 ```bash
 docker run --rm -it -v "$PWD:/go" -u "$UID:$GID" brimstone/golang-musl github.com/user/repo
 ```
+
+References
+----------
+
+http://dominik.honnef.co/posts/2015/06/statically_compiled_go_programs__always__even_with_cgo__using_musl/
+
