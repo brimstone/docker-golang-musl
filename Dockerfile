@@ -6,6 +6,17 @@ RUN wget http://www.musl-libc.org/releases/musl-latest.tar.gz \
  && cd musl* \
  && ./configure \
  && make \
- && make install
+ && make install \
+ && rm -rf musl*
 
-ENV CC /usr/local/bin/musl-gcc
+ENV CC /usr/local/musl/bin/musl-gcc
+
+ENTRYPOINT [ \
+	"/usr/local/go/bin/go", \
+	"build", \
+	"-a", \
+	"-installsuffix", \
+	"cgo", \
+	"-ldflags", \
+	"-extldflags \"-static\"" \
+	]
