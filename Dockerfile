@@ -1,4 +1,6 @@
-FROM golang:1.6beta2-wheezy
+FROM golang:1.6beta2-alpine
+
+RUN apk -U add gcc make git
 
 RUN wget http://www.musl-libc.org/releases/musl-latest.tar.gz \
  && tar -zxvf musl-latest.tar.gz \
