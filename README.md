@@ -19,6 +19,16 @@ Then build!
 docker run --rm -it -v "$PWD:/go" -u "$UID:$GID" brimstone/golang-musl github.com/user/repo
 ```
 
+
+Alternate build
+---------------
+```bash
+tar c src \
+| docker run --rm -i -e TAR=1 brimstone/golang-musl github.com/user/repo \
+| tar -x ./main
+```
+
+
 References
 ----------
 

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -ue
+
+if [ "$#" = 0 ]; then
+	echo "Must specify the namespace to build." >&2
+	echo "ex: github.com/repo/project"
+	exit 1
+fi
+
+if [ -n "$TAR" ]; then
+	tar -x >&2
+	( cd "src/$@"
+	/usr/local/go/bin/go get -v -d
+	) >&2
+fi
+
+/usr/local/go/bin/go build -a -installsuffix cgo -ldflags "-extldflags \"-static"\" "$@" >&2
+
+[ -n "$TAR" ] && tar -c .
