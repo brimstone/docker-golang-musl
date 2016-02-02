@@ -26,7 +26,7 @@ Alternate build
 
 For when another repo is included in a `src` directory, for instance, a submodule:
 ```bash
-tar c . \
+tar c src \
 | docker run --rm -i -e TAR=1 brimstone/golang-musl github.com/user/repo \
 | tar -x ./main
 ```
