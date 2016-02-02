@@ -3,6 +3,7 @@ golang-musl
 
 This is a container to build golang static binaries with musl instead of glibc.
 
+
 Usage
 -----
 
@@ -22,11 +23,25 @@ docker run --rm -it -v "$PWD:/go" -u "$UID:$GID" brimstone/golang-musl github.co
 
 Alternate build
 ---------------
+
+For when another repo is included in a `src` directory, for instance, a submodule:
 ```bash
-tar c src \
+tar c . \
 | docker run --rm -i -e TAR=1 brimstone/golang-musl github.com/user/repo \
 | tar -x ./main
 ```
+
+For when there's just source files in a diretory:
+```bash
+tar c . \
+| docker run --rm -i -e TAR=1 brimstone/golang-musl -o main \
+| tar -x ./main
+
+
+Environment Variables
+---------------------
+
+`VERBOSE` This makes the loader script more verbose
 
 
 References
