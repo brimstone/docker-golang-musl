@@ -1,4 +1,4 @@
-FROM golang:1.6beta2-alpine
+FROM golang:1.6.0-alpine
 
 RUN apk -U add gcc make git musl-dev
 
