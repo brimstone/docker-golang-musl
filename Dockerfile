@@ -6,6 +6,8 @@ ENV TAR ""
 
 ENV VERBOSE ""
 
+ENV LDFLAGS ""
+
 COPY loader /loader
 
 ENTRYPOINT [ "/loader" ]
