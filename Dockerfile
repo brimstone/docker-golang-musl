@@ -4,7 +4,7 @@ ENV TAR="" \
     VERBOSE="" \
     LDFLAGS=""
 
-RUN apk -U add gcc make git musl-dev
+RUN apk -U add gcc make git musl-dev jq-dev
 
 COPY loader /loader
 
