@@ -3,6 +3,8 @@ golang-musl
 
 This is a container to build golang static binaries with musl instead of glibc.
 
+[![](https://images.microbadger.com/badges/image/brimstone/golang-musl.svg)](https://microbadger.com/images/brimstone/golang-musl "Get your own image badge on microbadger.com")
+
 
 Usage
 -----
