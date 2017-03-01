@@ -16,4 +16,6 @@ RUN apk -U add gcc make git musl-dev jq-dev
 
 COPY loader /loader
 
+WORKDIR /go/src/app
+
 ENTRYPOINT [ "/loader" ]
