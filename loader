@@ -19,4 +19,6 @@ fi
 
 /usr/local/go/bin/go build -a -installsuffix cgo -ldflags "-linkmode external -extldflags \"-static\" -s -w $LDFLAGS" "$@" >&2
 
-[ -n "$TAR" ] && tar -c .
+if [ -n "$TAR" ]; then
+	tar -c .
+fi
