@@ -19,3 +19,11 @@ COPY loader /loader
 WORKDIR /go/src/app
 
 ENTRYPOINT [ "/loader" ]
+
+ONBUILD ARG PACKAGE
+
+ONBUILD COPY . /go/src/${PACKAGE}/
+
+ONBUILD WORKDIR /go/src/${PACKAGE}/
+
+ONBUILD RUN /loader -o /app
