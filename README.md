@@ -22,7 +22,6 @@ Then build!
 docker run --rm -it -v "$PWD:/go" -u "$UID:$GID" brimstone/golang-musl github.com/user/repo
 ```
 
-
 Alternate build
 ---------------
 
@@ -45,6 +44,24 @@ Environment Variables
 
 `VERBOSE` This makes the loader script more verbose
 
+ONBUILD
+-------
+
+This image supports docker multistage builds. Simply use this as template for your Dockerfile:
+```
+FROM brimstone/golang-musl as builder
+
+FROM scratch
+ENV ADDRESS=
+EXPOSE 80
+ENTRYPOINT ["/repo", "serve"]
+COPY --from=builder /app /repo
+```
+
+Then build with this:
+```
+docker build -t user/repo --build-arg PACKAGE=github.com/user/repo .
+```
 
 References
 ----------
