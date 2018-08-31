@@ -17,7 +17,34 @@ if [ -n "$TAR" ]; then
 	)
 fi
 
-/usr/local/go/bin/go build -a -ldflags "-linkmode external -extldflags \"-static\" -s -w $LDFLAGS" "$@" >&2
+if [ "${GOOS}" = "linux" ]; then
+	if [ "${GOARCH}" = "arm" ]; then
+		export CC=arm-linux-gnueabihf-gcc-6
+		export CXX=arm-linux-gnueabihf-g++-6
+	elif [ "${GOARCH}" = "amd64" ]; then
+		export CC=/usr/local/musl/bin/musl-gcc
+	fi
+elif [ "${GOOS}" = "windows" ]; then
+	export CGO_ENABLED=1
+	if [ "${GOARCH}" = "386" ]; then
+		export CC=/usr/bin/i686-w64-mingw32-gcc
+	elif [ "${GOARCH}" = "amd64" ]; then
+		export CC=/usr/bin/x86_64-w64-mingw32-gcc
+	fi
+elif [ "${GOOS}" = "darwin" ]; then
+	export CGO_ENABLED=1
+	if [ "${GOARCH}" = "386" ]; then
+		export CC=/usr/local/osx-ndk-x86/bin/o32-clang
+		export CCXX=/usr/local/osx-ndk-x86/bin/o32-clang++
+	elif [ "${GOARCH}" = "amd64" ]; then
+		export CC=/usr/local/osx-ndk-x86/bin/o64-clang
+		export CCXX=/usr/local/osx-ndk-x86/bin/o64-clang++
+	fi
+fi
+
+
+#/usr/local/go/bin/go build -v -a -ldflags "-linkmode external -extldflags \"-static\" -s -w $LDFLAGS" "$@" >&2
+/usr/local/go/bin/go build -v -a -ldflags "-s -w $LDFLAGS" "$@" >&2
 
 if [ -n "$TAR" ]; then
 	tar -c .
